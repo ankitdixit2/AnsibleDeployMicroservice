@@ -2,7 +2,7 @@ def notifySlack(String buildStatus = 'STARTED') {
     // Build status of null means success.
     buildStatus = buildStatus ?: 'SUCCESS'
     
-    def msg = "${buildStatus}: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:-Docker images are pulled and deployed into Docker Swarm(VMs) by shrilekha.s"
+    def msg = "${buildStatus}: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:-Docker images are pulled and deployed into Docker Swarm(VMs) by ankit.dixit"
 
     slackSend(message: msg)
 }
