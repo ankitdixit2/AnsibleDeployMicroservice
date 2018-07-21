@@ -9,15 +9,18 @@ def notifySlack(String buildStatus = 'STARTED') {
 
 node {
     checkout scm
+    try {
     stage('build') {
         /* Create docker swarm */
          sh "sudo ansible-playbook /etc/ansible/playbooks/eia-deploy-microservice.yml"           
     }
-    try {      
+    currentBuild.result = "SUCCESS"
         notifySlack(currentBuild.result)
+
         // Existing build steps.
     } catch (e) {
         currentBuild.result = 'FAILURE'
-        throw e
-    } 
+        //throw e
+        notifySlack(currentBuild.result)
+    }
 }
